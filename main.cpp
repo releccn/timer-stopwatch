@@ -205,12 +205,12 @@ void home() {
   if (digitalRead(btn1) == LOW) {
         curr_state = TIMER_HOME;
         lcd.clear();
-        delay(500);
+        delay(300);
       }
   if (digitalRead(btn2) == LOW) {
         curr_state = STOPWATCH_HOME;
         lcd.clear();
-        delay(500);
+        delay(300);
       }
 }
 
@@ -227,26 +227,26 @@ void timer_home() {
   if (digitalRead(btn4) == LOW) {
     curr_state = HOME;
     lcd.clear();
-    delay(500);
+    delay(300);
   }
 
   if (digitalRead(btn1) == LOW) { // 30 mins
     timeTillEndofTimer = timerTimeOptions[0]; // 30m 00s
     curr_state = TIMER_RUNNING;
     lcd.clear();
-    delay(100); 
+    delay(300); 
   }
   else if (digitalRead(btn2) == LOW) { // 45 mins
     timeTillEndofTimer = timerTimeOptions[1]; // 45m 00s
     curr_state = TIMER_RUNNING;
     lcd.clear();
-    delay(100);
+    delay(300);
   }
   else if (digitalRead(btn3) == LOW) { // 1 hour
     timeTillEndofTimer = timerTimeOptions[2]; // 59m 59s
     curr_state = TIMER_RUNNING;
     lcd.clear();
-    delay(100);
+    delay(300);
   }
 }
 
@@ -272,8 +272,6 @@ void timer_running() {
     if (interruptOccured == true) {
     interruptOccured = !interruptOccured;
     timeTillEndofTimer -= 1;
-    // lcd.setCursor(4,1);
-    // lcd.print(lcdBuffer); // Print string TIMEFORMAT to LCD
     }
 
     // End of Timer
@@ -288,13 +286,13 @@ void timer_running() {
         timerStop(timerCounter);
         curr_state = TIMER_PAUSE;
         lcd.clear();
-        delay(500);
+        delay(300);
       }
     if (digitalRead(btn2) == LOW) {
       timerStop(timerCounter);
       curr_state = TIMER_END;
       lcd.clear();
-      delay(500);
+      delay(300);
     }
 }
 
@@ -314,22 +312,22 @@ void timer_pause() {
   // Conditionals for State Switching
   if (digitalRead(btn1) == LOW) {
     timerStart(timerCounter);
-    delay(100);
+    //delay(100);
     curr_state = TIMER_RUNNING;
     lcd.clear();
-    delay(100);
+    delay(300);
   }
   if (digitalRead(btn2) == LOW) {
     curr_state = TIMER_HOME;
     timerStop(timerCounter);
     lcd.clear();
-    delay(100);
+    delay(300);
   }
   if (digitalRead(btn4) == LOW) {
     curr_state = HOME;
     timerStop(timerCounter);
     lcd.clear();
-    delay(100);
+    delay(300);
   }
 }
 
@@ -366,12 +364,12 @@ void stopwatch_home() {
     timerStart(timerCounter);
     curr_state = STOPWATCH_RUNNING;
     lcd.clear();
-    delay(150);
+    delay(300);
   }
   if (digitalRead(btn4) == LOW) {
     curr_state = HOME;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
 }
 
@@ -402,13 +400,13 @@ void stopwatch_running() {
     timerStop(timerCounter);
     curr_state = STOPWATCH_PAUSE;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
   if (digitalRead(btn2) == LOW) {
     timerStop(timerCounter);
     curr_state = STOPWATCH_END;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
 }
 
@@ -431,39 +429,39 @@ void stopwatch_pause() {
     timerStart(timerCounter);
     curr_state = STOPWATCH_RUNNING;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
   if (digitalRead(btn2) == LOW) {
     curr_state = STOPWATCH_HOME;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
   if (digitalRead(btn4) == LOW) {
     timerStop(timerCounter);
     curr_state = HOME;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
 }
 
 void stopwatch_end() {
   // STOPWATCH ENDED
   lcd.setCursor(0,0);
-  lcd.print("STOPWATCH ENDED");
+  lcd.print("STOPWATCH  ENDED");
 
   // STOPWATCH TIME
   lcd.setCursor(0,1);
   lcd.print(lcdBuffer);
 
   // [HOME]
-  lcd.setCursor(9, 1);
+  lcd.setCursor(10, 1);
   lcd.print("[HOME]");
 
   // Conditionals for State Switching
   if (digitalRead(btn4) == LOW) {
     curr_state = HOME;
     lcd.clear();
-    delay(200);
+    delay(300);
   }
 }
 
